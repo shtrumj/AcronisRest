@@ -52,6 +52,7 @@ def get_acronis_backups():
                 elif items['result']['code'] == 'error':
                     BadBackups = BadBackups + 1
                     pprint.pprint(items['context']['BackupPlanName'] + " has failed to backup")
+                    return BadBackups
                     sys.exit(2)
         except :
             pass
@@ -60,3 +61,8 @@ def get_acronis_backups():
     if GoodBackups > 1 & BadBackups == 0 :
         print('All Good!')
         sys.exit(0)
+
+Errors = get_acronis_backups()
+if Errors > 0:
+    print('Error')
+    sys.exit(2)
